@@ -13,7 +13,7 @@ export default function MenuHighlight({ brief, formData }: MenuHighlightProps) {
   const primary = brief.colorPalette[0]?.hex || "#E44332";
 
   return (
-    <section className="py-24 px-6" style={{ backgroundColor: `${primary}0a` }}>
+    <section className="py-24 px-6 bg-gray-50">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,12 +37,7 @@ export default function MenuHighlight({ brief, formData }: MenuHighlightProps) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Dish photo placeholder */}
             <div className="relative">
-              <div
-                className="aspect-square rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${primary}20, ${brief.colorPalette[4]?.hex || "#f0e0d0"}40)`,
-                }}
-              />
+              <div className="aspect-square rounded-2xl bg-gray-100" />
               <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-dashed border-gray-200">
                 <p className="text-gray-400 text-sm">Your dish photo here</p>
               </div>

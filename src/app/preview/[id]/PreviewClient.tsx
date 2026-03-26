@@ -18,7 +18,7 @@ interface PreviewClientProps {
 
 export default function PreviewClient({ formData, brief }: PreviewClientProps) {
   const primary = brief.colorPalette[0]?.hex || "#E44332";
-  const dark = brief.colorPalette[3]?.hex || "#1a1a1a";
+  const dark = "#141414"; // Always use guaranteed dark for legibility
 
   return (
     <div className="min-h-screen bg-white">

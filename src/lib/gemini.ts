@@ -98,7 +98,13 @@ Generate a JSON object with EXACTLY this structure:
 RULES:
 - MENU: Create realistic, appetizing dishes that match the cuisine implied by the restaurant name, vibe, and signature dish. Prices should be realistic for the vibe (casual=$10-20, formal=$25-50, trendy=$15-30, traditional=$12-25). The signature dish MUST be in Mains with the tag "Signature".
 - TESTIMONIALS: Write reviews that sound like real Google/Yelp reviews — specific, personal, mention actual dishes. Use first names with last initial.
-- COLOR PALETTE: Match the vibe (warm for traditional, bold for trendy, muted for formal, bright for casual). First color = primary brand color.
+- COLOR PALETTE — THIS IS CRITICAL FOR LEGIBILITY:
+  - Color 1 (primary): A SATURATED, MEDIUM-TO-DARK accent color. Must have good contrast on white. NO pastels, no light colors, no beige, no gold, no yellow. Think: deep red, forest green, navy blue, burgundy, terracotta, dark teal.
+  - Color 2 (light background): A very light tint (near-white) derived from the primary. Used for section backgrounds. Must be light enough to read dark text on it (lightness > 90%).
+  - Color 3 (accent): A complementary or analogous color to the primary. Also saturated and medium-dark.
+  - Color 4 (dark): Always a near-black (#1a1a1a to #2d2d2d range). Used for dark sections.
+  - Color 5 (warm neutral): A subtle warm or cool gray for text. Between #4a4a4a and #6b6b6b.
+  - NEVER generate light/pastel/washed-out primary colors. The primary MUST pop on white and work as button/badge color with white text on top.
 - COPY: Write like a human. No corporate speak. Tone must match: ${vibeDesc}.
 - TAGLINE: Short, memorable, could go on a t-shirt.
 - Make "${formData.signatureDish}" the star everywhere — hero copy, menu, at least one testimonial.`;

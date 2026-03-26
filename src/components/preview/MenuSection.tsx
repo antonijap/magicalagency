@@ -10,10 +10,9 @@ interface MenuSectionProps {
 
 export default function MenuSection({ brief }: MenuSectionProps) {
   const primary = brief.colorPalette[0]?.hex || "#E44332";
-  const dark = brief.colorPalette[3]?.hex || "#1a1a1a";
 
   return (
-    <section className="py-24 px-6" style={{ backgroundColor: dark }}>
+    <section className="py-24 px-6 bg-[#141414]">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,8 +42,8 @@ export default function MenuSection({ brief }: MenuSectionProps) {
                 transition={{ delay: ci * 0.1, duration: 0.4 }}
               >
                 <h3
-                  className="text-lg font-bold uppercase tracking-wider mb-6 pb-3 border-b"
-                  style={{ color: primary, borderColor: `${primary}40` }}
+                  className="text-lg font-bold uppercase tracking-wider mb-6 pb-3 border-b border-white/10"
+                  style={{ color: primary }}
                 >
                   {category.category}
                 </h3>
@@ -68,7 +67,7 @@ export default function MenuSection({ brief }: MenuSectionProps) {
                             </span>
                           )}
                         </div>
-                        <p className="text-gray-500 text-sm mt-0.5">
+                        <p className="text-gray-400 text-sm mt-0.5">
                           {item.description}
                         </p>
                       </div>

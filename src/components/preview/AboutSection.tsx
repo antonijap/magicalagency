@@ -12,7 +12,7 @@ export default function AboutSection({ brief, formData }: AboutSectionProps) {
   const primary = brief.colorPalette[0]?.hex || "#E44332";
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -21,23 +21,18 @@ export default function AboutSection({ brief, formData }: AboutSectionProps) {
           transition={{ duration: 0.5 }}
         >
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Image placeholder — looks real */}
+            {/* Image placeholder */}
             <div className="relative">
-              <div
-                className="aspect-[4/5] rounded-2xl"
-                style={{
-                  background: `linear-gradient(145deg, ${primary}30, ${brief.colorPalette[2]?.hex || "#ddd"}40)`,
-                }}
-              />
+              <div className="aspect-[4/5] rounded-2xl bg-gray-100" />
               <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-dashed border-gray-200">
                 <p className="text-gray-400 text-sm text-center px-8">
                   Your restaurant photo here
                 </p>
               </div>
-              {/* Floating accent */}
+              {/* Small accent block */}
               <div
-                className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl opacity-60"
-                style={{ backgroundColor: primary }}
+                className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl"
+                style={{ backgroundColor: primary, opacity: 0.15 }}
               />
             </div>
 
