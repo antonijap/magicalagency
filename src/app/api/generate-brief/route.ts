@@ -4,6 +4,8 @@ import { generateBrief } from "@/lib/gemini";
 import { saveBrief } from "@/lib/redis";
 import { StoredBrief } from "@/types";
 
+export const maxDuration = 30;
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -44,9 +46,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ id });
   } catch (error) {
-    console.error("Generate brief error:", error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error("Generate brief error:", errMsg, error);
     return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
+      { error: "Something went wrong. Please try again.", detail: errMsg },
       { status: 500 }
     );
   }
