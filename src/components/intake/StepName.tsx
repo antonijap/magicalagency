@@ -5,31 +5,26 @@ import { IntakeFormData } from "@/types";
 
 interface StepProps {
   data: IntakeFormData;
-  setField: <K extends keyof IntakeFormData>(
-    key: K,
-    value: IntakeFormData[K]
-  ) => void;
+  setField: <K extends keyof IntakeFormData>(key: K, value: IntakeFormData[K]) => void;
   error: string | null;
 }
 
 export default function StepName({ data, setField, error }: StepProps) {
   return (
-    <div className="space-y-2">
-      <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">
+    <div>
+      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-1.5">
         What&apos;s the name of your spot?
       </h2>
-      <p className="text-gray-400 text-lg">
+      <p className="text-sm text-gray-400 mb-8">
         The one on the sign. The one people tell their friends about.
       </p>
-      <div className="pt-8">
-        <Input
-          label="Restaurant Name"
-          value={data.restaurantName}
-          onChange={(v) => setField("restaurantName", v)}
-          placeholder="e.g. Mama Rosa's Kitchen"
-          error={error || undefined}
-        />
-      </div>
+      <Input
+        label="Restaurant name"
+        value={data.restaurantName}
+        onChange={(v) => setField("restaurantName", v)}
+        placeholder="e.g. Mama Rosa's Kitchen"
+        error={error || undefined}
+      />
     </div>
   );
 }

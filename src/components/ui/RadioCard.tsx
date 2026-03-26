@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Sun, Wine, Zap, Heart, LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = { Sun, Wine, Zap, Heart };
@@ -20,44 +19,35 @@ export default function RadioCard({
   icon,
   selected,
   onClick,
-  index,
 }: RadioCardProps) {
   const Icon = iconMap[icon] || Heart;
 
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className={`w-full text-left p-5 rounded-xl border-2 transition-all ${
+      className={`w-full text-left px-4 py-3.5 rounded-lg border transition-colors ${
         selected
-          ? "border-primary bg-primary-light shadow-sm"
-          : "border-gray-100 bg-white hover:border-gray-200"
+          ? "border-gray-900 bg-gray-50"
+          : "border-gray-150 bg-white hover:bg-gray-50"
       }`}
     >
-      <div className="flex items-start gap-4">
-        <div
-          className={`p-2.5 rounded-lg ${
-            selected ? "bg-primary text-white" : "bg-gray-50 text-gray-400"
-          } transition-colors`}
-        >
-          <Icon size={22} />
-        </div>
+      <div className="flex items-center gap-3">
+        <Icon
+          size={18}
+          className={selected ? "text-gray-900" : "text-gray-300"}
+        />
         <div>
           <p
-            className={`font-semibold text-lg ${
-              selected ? "text-primary" : "text-gray-800"
+            className={`text-sm font-medium ${
+              selected ? "text-gray-900" : "text-gray-700"
             }`}
           >
             {label}
           </p>
-          <p className="text-gray-400 text-sm mt-0.5">{description}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{description}</p>
         </div>
       </div>
-    </motion.button>
+    </button>
   );
 }

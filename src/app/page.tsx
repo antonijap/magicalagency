@@ -1,104 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Clock, Shield, Palette } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Nav */}
-      <nav className="px-6 py-5 flex items-center justify-between max-w-5xl mx-auto w-full">
-        <span className="text-xl font-bold tracking-tighter text-gray-900">
+      {/* Nav — Notion-style: thin, quiet, lots of air */}
+      <nav className="px-6 py-4 flex items-center justify-between max-w-3xl mx-auto w-full">
+        <span className="text-sm font-medium text-gray-900 tracking-tight">
           magical<span className="text-primary">.</span>
         </span>
         <Link
           href="/intake"
-          className="text-sm font-medium text-gray-400 hover:text-primary transition-colors"
+          className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
         >
-          Get Started
+          Get started &rarr;
         </Link>
       </nav>
 
-      {/* Hero */}
-      <main className="flex-1 flex items-center px-6">
-        <div className="max-w-3xl mx-auto w-full text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Trust badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-primary-light text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-8"
-            >
-              <Sparkles size={14} />
-              Free in 60 seconds. No strings attached.
-            </motion.div>
+      <div className="w-full max-w-3xl mx-auto px-6">
+        <div className="h-px bg-gray-100" />
+      </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-gray-900 leading-[0.95] mb-6">
-              Your restaurant
-              <br />
-              deserves a website
-              <br />
-              <span className="text-primary">as good as</span>
-              <br />
-              your food.
+      {/* Hero — stripped back, Notion-minimal */}
+      <main className="flex-1 flex items-center px-6">
+        <div className="max-w-2xl mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-sm text-gray-400 mb-6">
+              Free &middot; 60 seconds &middot; No signup
+            </p>
+
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 leading-[1.1] mb-5">
+              Your restaurant deserves a website as good as your food.
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg text-gray-400 mb-10 leading-relaxed max-w-lg">
               Answer 4 quick questions about your place. We&apos;ll generate a
               custom homepage draft while you wait.
             </p>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+            {/* CTA — clean, no shadow, Notion-style */}
+            <Link
+              href="/intake"
+              className="inline-flex items-center gap-2 bg-gray-900 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-gray-800 transition-colors"
             >
-              <Link
-                href="/intake"
-                className="inline-flex items-center gap-3 bg-primary text-white font-semibold text-lg px-8 py-4 rounded-xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/20"
-              >
-                Start the Chef&apos;s Intake
-                <ArrowRight size={20} />
-              </Link>
-            </motion.div>
+              Start the Chef&apos;s Intake
+              <ArrowRight size={14} />
+            </Link>
 
-            {/* Trust signals */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12 text-sm text-gray-300"
-            >
-              <span className="flex items-center gap-1.5">
-                <Clock size={14} />
-                60-second draft
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Shield size={14} />
-                No payment needed
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Palette size={14} />
-                AI-powered design
-              </span>
-            </motion.div>
+            {/* Subtle trust line */}
+            <p className="text-xs text-gray-300 mt-6">
+              No payment needed &middot; AI-powered &middot; Shareable link
+            </p>
           </motion.div>
         </div>
       </main>
-
-      {/* Footer hint */}
-      <div className="px-6 py-8 text-center">
-        <p className="text-xs text-gray-200">
-          Trusted by 200+ restaurants. Powered by AI.
-        </p>
-      </div>
     </div>
   );
 }

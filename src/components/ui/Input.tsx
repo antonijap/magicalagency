@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface InputProps {
   label: string;
   value: string;
@@ -22,18 +20,11 @@ export default function Input({
   multiline = false,
 }: InputProps) {
   const inputClasses =
-    "w-full bg-transparent border-b-2 border-gray-200 focus:border-primary outline-none py-3 text-xl text-gray-800 placeholder:text-gray-300 transition-colors";
+    "w-full bg-transparent border-0 border-b border-gray-200 focus:border-gray-900 outline-none py-2 text-base text-gray-900 placeholder:text-gray-300 transition-colors";
 
   return (
-    <motion.div
-      className="w-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.1 }}
-    >
-      <label className="block text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
-        {label}
-      </label>
+    <div className="w-full">
+      <label className="block text-xs text-gray-400 mb-2">{label}</label>
       {multiline ? (
         <textarea
           value={value}
@@ -53,14 +44,8 @@ export default function Input({
         />
       )}
       {error && (
-        <motion.p
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-primary text-sm mt-2"
-        >
-          {error}
-        </motion.p>
+        <p className="text-red-500 text-xs mt-1.5">{error}</p>
       )}
-    </motion.div>
+    </div>
   );
 }
