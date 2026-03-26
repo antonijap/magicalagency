@@ -1,52 +1,61 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GeneratedBrief } from "@/types";
+import { GeneratedBrief, IntakeFormData } from "@/types";
 
 interface AboutSectionProps {
   brief: GeneratedBrief;
+  formData: IntakeFormData;
 }
 
-export default function AboutSection({ brief }: AboutSectionProps) {
-  const accentColor = brief.colorPalette[1]?.hex || brief.colorPalette[0]?.hex || "#E44332";
+export default function AboutSection({ brief, formData }: AboutSectionProps) {
+  const primary = brief.colorPalette[0]?.hex || "#E44332";
 
   return (
-    <section className="py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-6">
+      <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
         >
-          <div
-            className="w-12 h-1 rounded-full mb-8"
-            style={{ backgroundColor: accentColor }}
-          />
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900 mb-10">
-            Our Story
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              {brief.aboutParagraphs.slice(0, 2).map((p, i) => (
-                <p key={i} className="text-lg text-gray-500 leading-relaxed">
-                  {p}
-                </p>
-              ))}
-            </div>
-            <div className="space-y-6">
-              {brief.aboutParagraphs.slice(2).map((p, i) => (
-                <p key={i} className="text-lg text-gray-500 leading-relaxed">
-                  {p}
-                </p>
-              ))}
-              {/* Visual placeholder for imagery */}
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Image placeholder — looks real */}
+            <div className="relative">
               <div
-                className="h-48 rounded-2xl opacity-10"
+                className="aspect-[4/5] rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${brief.colorPalette[0]?.hex || "#E44332"}, ${brief.colorPalette[2]?.hex || "#333"})`,
+                  background: `linear-gradient(145deg, ${primary}30, ${brief.colorPalette[2]?.hex || "#ddd"}40)`,
                 }}
               />
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-dashed border-gray-200">
+                <p className="text-gray-400 text-sm text-center px-8">
+                  Your restaurant photo here
+                </p>
+              </div>
+              {/* Floating accent */}
+              <div
+                className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl opacity-60"
+                style={{ backgroundColor: primary }}
+              />
+            </div>
+
+            {/* Content */}
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider mb-3" style={{ color: primary }}>
+                Our Story
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+                Welcome to {formData.restaurantName}
+              </h2>
+              <div className="space-y-5">
+                {brief.aboutParagraphs.map((p, i) => (
+                  <p key={i} className="text-gray-600 text-base leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

@@ -9,56 +9,63 @@ interface MenuHighlightProps {
   formData: IntakeFormData;
 }
 
-export default function MenuHighlight({
-  brief,
-  formData,
-}: MenuHighlightProps) {
-  const primaryColor = brief.colorPalette[0]?.hex || "#E44332";
+export default function MenuHighlight({ brief, formData }: MenuHighlightProps) {
+  const primary = brief.colorPalette[0]?.hex || "#E44332";
 
   return (
-    <section
-      className="py-20 px-6"
-      style={{ backgroundColor: `${primaryColor}08` }}
-    >
-      <div className="max-w-4xl mx-auto">
+    <section className="py-24 px-6" style={{ backgroundColor: `${primary}0a` }}>
+      <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 mb-6">
-            <Star size={20} style={{ color: primaryColor }} fill={primaryColor} />
-            <span
-              className="text-sm font-semibold uppercase tracking-wider"
-              style={{ color: primaryColor }}
-            >
-              Signature Dish
-            </span>
-            <Star size={20} style={{ color: primaryColor }} fill={primaryColor} />
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <Star size={18} style={{ color: primary }} fill={primary} />
+              <span className="text-sm font-semibold uppercase tracking-wider" style={{ color: primary }}>
+                Signature Dish
+              </span>
+              <Star size={18} style={{ color: primary }} fill={primary} />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+              {formData.signatureDish}
+            </h2>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">
-            {formData.signatureDish}
-          </h2>
-          <p className="text-lg text-gray-400 max-w-xl mx-auto mb-10">
-            The dish that started it all. The reason regulars keep coming back
-            and new faces light up.
-          </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Dish photo placeholder */}
+            <div className="relative">
+              <div
+                className="aspect-square rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${primary}20, ${brief.colorPalette[4]?.hex || "#f0e0d0"}40)`,
+                }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-dashed border-gray-200">
+                <p className="text-gray-400 text-sm">Your dish photo here</p>
+              </div>
+            </div>
 
-          {/* Visual dish card placeholder */}
-          <div className="relative max-w-md mx-auto">
-            <div
-              className="aspect-[4/3] rounded-2xl"
-              style={{
-                background: `linear-gradient(135deg, ${primaryColor}20, ${brief.colorPalette[2]?.hex || "#f5f5f5"}30)`,
-              }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <p className="text-gray-300 text-sm">
-                [Your beautiful dish photo here]
+            {/* Description */}
+            <div>
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                The dish that started it all. The reason regulars keep coming back
+                and new faces light up. Every bite tells the story of {formData.restaurantName}.
               </p>
+              <div className="flex items-center gap-4 mb-8">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} size={20} fill={primary} style={{ color: primary }} />
+                ))}
+                <span className="text-sm text-gray-500 font-medium">&quot;Best in town&quot;</span>
+              </div>
+              <button
+                className="px-6 py-3 rounded-lg text-white font-semibold"
+                style={{ backgroundColor: primary }}
+              >
+                See Full Menu
+              </button>
             </div>
           </div>
         </motion.div>

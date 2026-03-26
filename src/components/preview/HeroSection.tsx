@@ -9,54 +9,51 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ brief, formData }: HeroSectionProps) {
-  const primaryColor = brief.colorPalette[0]?.hex || "#E44332";
+  const primary = brief.colorPalette[0]?.hex || "#E44332";
+  const secondary = brief.colorPalette[1]?.hex || "#f5f0eb";
 
   return (
-    <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-      {/* Background gradient using generated primary color */}
+    <section className="relative py-28 md:py-40 px-6 overflow-hidden" style={{ backgroundColor: secondary }}>
+      {/* Decorative gradient */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-20"
         style={{
-          background: `radial-gradient(ellipse at top, ${primaryColor} 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse at bottom right, ${primary}, transparent 70%)`,
         }}
       />
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          {/* Restaurant name badge */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8"
-            style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}
-          >
-            <span
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: primaryColor }}
-            />
-            {formData.restaurantName}
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-gray-900 mb-6 leading-[0.95]">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 leading-[1] mb-6 max-w-4xl">
             {brief.heroHeadline}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-10 leading-relaxed">
             {brief.heroSubheadline}
           </p>
 
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
             <button
-              className="px-8 py-4 rounded-xl text-white font-semibold text-lg shadow-lg transition-transform hover:scale-[1.02]"
-              style={{ backgroundColor: primaryColor }}
+              className="px-8 py-4 rounded-lg text-white font-semibold text-lg shadow-lg transition-transform hover:scale-[1.02]"
+              style={{ backgroundColor: primary }}
             >
               Reserve a Table
             </button>
-            <button className="px-8 py-4 rounded-xl text-gray-600 font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-colors">
-              View Menu
+            <button className="px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+              View Our Menu
             </button>
+          </div>
+
+          {/* Info bar */}
+          <div className="flex flex-wrap items-center gap-6 mt-12 text-sm text-gray-500">
+            <span>{formData.location}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span>{formData.hours}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span>Reservations welcome</span>
           </div>
         </motion.div>
       </div>
