@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Clock, Phone, Menu } from "lucide-react";
 import { GeneratedBrief, IntakeFormData } from "@/types";
@@ -9,6 +10,7 @@ import AboutSection from "@/components/preview/AboutSection";
 import MenuSection from "@/components/preview/MenuSection";
 import TestimonialsSection from "@/components/preview/TestimonialsSection";
 import BookingOverlay from "@/components/preview/BookingOverlay";
+import DesignToolbar from "@/components/preview/DesignToolbar";
 
 interface PreviewClientProps {
   formData: IntakeFormData;
@@ -17,7 +19,8 @@ interface PreviewClientProps {
 
 export default function PreviewClient({ formData, brief }: PreviewClientProps) {
   const primary = brief.colorPalette[0]?.hex || "#8B4513";
-  const t = getTheme(formData.vibe);
+  const [activeVibe, setActiveVibe] = useState(formData.vibe);
+  const t = getTheme(activeVibe);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: t.pageBg }}>
@@ -148,6 +151,11 @@ export default function PreviewClient({ formData, brief }: PreviewClientProps) {
       </footer>
 
       <BookingOverlay primaryColor={primary} />
+      <DesignToolbar
+        currentVibe={activeVibe}
+        onVibeChange={setActiveVibe}
+        primaryColor={primary}
+      />
     </div>
   );
 }
