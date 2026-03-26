@@ -6,6 +6,24 @@ export interface IntakeFormData {
   hours: string;
 }
 
+export interface MenuItem {
+  name: string;
+  description: string;
+  price: string;
+  tag?: string;
+}
+
+export interface MenuCategory {
+  category: string;
+  items: MenuItem[];
+}
+
+export interface Testimonial {
+  name: string;
+  text: string;
+  rating: number;
+}
+
 export interface GeneratedBrief {
   heroHeadline: string;
   heroSubheadline: string;
@@ -13,6 +31,9 @@ export interface GeneratedBrief {
   colorPalette: { hex: string; name: string }[];
   sections: { title: string; description: string; content: string }[];
   voiceTone: string;
+  menu: MenuCategory[];
+  testimonials: Testimonial[];
+  tagline: string;
 }
 
 export interface StoredBrief {

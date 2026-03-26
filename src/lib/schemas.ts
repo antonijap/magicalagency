@@ -11,6 +11,7 @@ export const intakeFormSchema = z.object({
 export const generatedBriefSchema = z.object({
   heroHeadline: z.string(),
   heroSubheadline: z.string(),
+  tagline: z.string(),
   aboutParagraphs: z.array(z.string()).min(2).max(4),
   colorPalette: z
     .array(z.object({ hex: z.string(), name: z.string() }))
@@ -26,5 +27,25 @@ export const generatedBriefSchema = z.object({
     )
     .min(3)
     .max(4),
+  menu: z.array(
+    z.object({
+      category: z.string(),
+      items: z.array(
+        z.object({
+          name: z.string(),
+          description: z.string(),
+          price: z.string(),
+          tag: z.string().optional(),
+        })
+      ),
+    })
+  ),
+  testimonials: z.array(
+    z.object({
+      name: z.string(),
+      text: z.string(),
+      rating: z.number(),
+    })
+  ),
   voiceTone: z.string(),
 });

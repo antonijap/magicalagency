@@ -6,6 +6,8 @@ import { GeneratedBrief, IntakeFormData } from "@/types";
 import HeroSection from "@/components/preview/HeroSection";
 import AboutSection from "@/components/preview/AboutSection";
 import MenuHighlight from "@/components/preview/MenuHighlight";
+import MenuSection from "@/components/preview/MenuSection";
+import TestimonialsSection from "@/components/preview/TestimonialsSection";
 import SectionsPreview from "@/components/preview/SectionsPreview";
 import BookingOverlay from "@/components/preview/BookingOverlay";
 
@@ -20,7 +22,7 @@ export default function PreviewClient({ formData, brief }: PreviewClientProps) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Agency banner — bold, visible */}
+      {/* Agency banner */}
       <motion.div
         initial={{ y: -40 }}
         animate={{ y: 0 }}
@@ -30,15 +32,21 @@ export default function PreviewClient({ formData, brief }: PreviewClientProps) {
         This is a draft preview for <strong>{formData.restaurantName}</strong> — crafted by magical.
       </motion.div>
 
-      {/* Real-looking site nav */}
+      {/* Site nav */}
       <header className="px-6 py-5 border-b border-gray-100">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tight" style={{ color: dark }}>
-            {formData.restaurantName}
-          </span>
+          <div>
+            <span className="text-2xl font-bold tracking-tight" style={{ color: dark }}>
+              {formData.restaurantName}
+            </span>
+            {brief.tagline && (
+              <p className="text-xs text-gray-400 mt-0.5">{brief.tagline}</p>
+            )}
+          </div>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
             <span className="hover:text-gray-900 cursor-pointer">Menu</span>
             <span className="hover:text-gray-900 cursor-pointer">About</span>
+            <span className="hover:text-gray-900 cursor-pointer">Reviews</span>
             <span className="hover:text-gray-900 cursor-pointer">Contact</span>
             <button
               className="px-5 py-2.5 rounded-lg text-white text-sm font-semibold"
@@ -53,18 +61,36 @@ export default function PreviewClient({ formData, brief }: PreviewClientProps) {
         </div>
       </header>
 
-      {/* Generated website sections */}
+      {/* Page sections */}
       <HeroSection brief={brief} formData={formData} />
       <AboutSection brief={brief} formData={formData} />
       <MenuHighlight brief={brief} formData={formData} />
+      <MenuSection brief={brief} />
+      <TestimonialsSection brief={brief} />
       <SectionsPreview brief={brief} />
 
-      {/* Footer — looks like a real restaurant site footer */}
+      {/* CTA banner before footer */}
+      <section className="py-20 px-6 text-center" style={{ backgroundColor: primary }}>
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          Ready to Experience {formData.restaurantName}?
+        </h2>
+        <p className="text-white/80 text-lg mb-8 max-w-lg mx-auto">
+          Book your table today and taste what everyone&apos;s talking about.
+        </p>
+        <button className="px-8 py-4 bg-white rounded-lg font-bold text-lg hover:scale-[1.02] transition-transform" style={{ color: primary }}>
+          Make a Reservation
+        </button>
+      </section>
+
+      {/* Footer */}
       <footer className="py-16 px-6" style={{ backgroundColor: dark }}>
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-3 gap-10 mb-12">
             <div>
-              <h4 className="text-white text-lg font-bold mb-4">{formData.restaurantName}</h4>
+              <h4 className="text-white text-lg font-bold mb-2">{formData.restaurantName}</h4>
+              {brief.tagline && (
+                <p className="text-sm mb-4" style={{ color: primary }}>{brief.tagline}</p>
+              )}
               <p className="text-gray-400 text-sm leading-relaxed">
                 {brief.aboutParagraphs[0]?.slice(0, 120)}...
               </p>
@@ -78,8 +104,13 @@ export default function PreviewClient({ formData, brief }: PreviewClientProps) {
               </div>
             </div>
             <div>
-              <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-4">Hours</h4>
-              <p className="text-sm text-gray-400 leading-relaxed">{formData.hours}</p>
+              <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h4>
+              <div className="space-y-2 text-sm text-gray-400">
+                <p className="hover:text-white cursor-pointer transition-colors">Our Menu</p>
+                <p className="hover:text-white cursor-pointer transition-colors">Our Story</p>
+                <p className="hover:text-white cursor-pointer transition-colors">Reviews</p>
+                <p className="hover:text-white cursor-pointer transition-colors">Contact Us</p>
+              </div>
               <button
                 className="mt-4 px-5 py-2.5 rounded-lg text-white text-sm font-semibold"
                 style={{ backgroundColor: primary }}
