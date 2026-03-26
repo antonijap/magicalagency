@@ -53,7 +53,6 @@ export default function IntakeShell() {
         router.push(`/preview/${result.id}`);
       } catch {
         setGenError("Something went wrong in the kitchen. Let's try again.");
-        setIsGenerating(false);
       }
     } else {
       form.nextStep();
@@ -61,7 +60,7 @@ export default function IntakeShell() {
   };
 
   if (isGenerating) {
-    return <GeneratingScreen error={genError} onRetry={() => { setGenError(null); handleNext(); }} />;
+    return <GeneratingScreen error={genError} onRetry={() => { setGenError(null); setIsGenerating(false); setTimeout(() => handleNext(), 0); }} />;
   }
 
   return (
