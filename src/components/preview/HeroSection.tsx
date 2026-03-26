@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { GeneratedBrief, IntakeFormData } from "@/types";
 
 interface HeroSectionProps {
@@ -9,53 +10,59 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ brief, formData }: HeroSectionProps) {
-  const primary = brief.colorPalette[0]?.hex || "#E44332";
+  const primary = brief.colorPalette[0]?.hex || "#8B4513";
 
   return (
-    <section className="relative py-28 md:py-40 px-6 overflow-hidden bg-gray-50">
-      {/* Subtle accent gradient — never used as main background */}
+    <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-[#1a1a1a]">
+      {/* Background — gradient simulating a photo overlay */}
       <div
-        className="absolute inset-0 opacity-[0.07]"
+        className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at bottom right, ${primary}, transparent 70%)`,
+          background: `linear-gradient(135deg, ${primary}40 0%, #1a1a1a 50%, ${primary}20 100%)`,
         }}
       />
+      <div className="absolute inset-0 bg-black/40" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      {/* Placeholder for restaurant photo */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <p className="text-white/20 text-sm font-sans uppercase tracking-[0.3em]">
+          Your hero photograph here
+        </p>
+      </div>
+
+      {/* Content — minimal, centered, confident */}
+      <div className="relative z-10 text-center px-6 max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-gray-900 leading-[1] mb-6 max-w-4xl">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/60 font-sans mb-6">
+            {formData.location}
+          </p>
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05] mb-6">
             {brief.heroHeadline}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-500 max-w-2xl mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/70 font-sans font-light max-w-xl mx-auto leading-relaxed mb-12">
             {brief.heroSubheadline}
           </p>
-
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <button
-              className="px-8 py-4 rounded-lg text-white font-semibold text-lg transition-transform hover:scale-[1.02]"
-              style={{ backgroundColor: primary }}
-            >
-              Reserve a Table
-            </button>
-            <button className="px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-colors">
-              View Our Menu
-            </button>
-          </div>
-
-          {/* Info bar */}
-          <div className="flex flex-wrap items-center gap-6 mt-12 text-sm text-gray-400">
-            <span>{formData.location}</span>
-            <span className="w-1 h-1 rounded-full bg-gray-300" />
-            <span>{formData.hours}</span>
-            <span className="w-1 h-1 rounded-full bg-gray-300" />
-            <span>Reservations welcome</span>
-          </div>
+          <a
+            href="#reserve"
+            className="inline-block px-10 py-4 text-white text-xs uppercase tracking-[0.2em] font-sans border border-white/40 hover:bg-white hover:text-[#1a1a1a] transition-all duration-300"
+          >
+            Reserve a Table
+          </a>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <ChevronDown size={20} className="text-white/30" />
+      </motion.div>
     </section>
   );
 }

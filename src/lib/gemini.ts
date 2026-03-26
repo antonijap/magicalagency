@@ -33,9 +33,9 @@ RESTAURANT DETAILS:
 
 Generate a JSON object with EXACTLY this structure:
 {
-  "heroHeadline": "A powerful, emotional headline (max 8 words) that captures the restaurant's soul. SPECIFIC to this restaurant.",
-  "heroSubheadline": "A compelling sub-headline (max 20 words) that makes people want to visit RIGHT NOW.",
-  "tagline": "A short 3-5 word tagline/motto for the restaurant (e.g. 'Where flavor meets soul')",
+  "heroHeadline": "An evocative, poetic headline (max 6 words) that captures the restaurant's soul. Think Michelin-star restaurant website — elegant, not salesy. Examples: 'Where Every Flame Tells a Story', 'A Tradition Worth Savoring'.",
+  "heroSubheadline": "A single elegant sentence (max 18 words) that evokes atmosphere and flavor. No exclamation marks. Understated confidence.",
+  "tagline": "A 2-4 word motto (e.g. 'Flavor. Tradition. Soul.' or 'Since the beginning')",
   "aboutParagraphs": [
     "First paragraph: The origin story (2-3 sentences).",
     "Second paragraph: The experience (2-3 sentences).",

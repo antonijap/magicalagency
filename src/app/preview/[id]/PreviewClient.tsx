@@ -5,10 +5,8 @@ import { MapPin, Clock, Phone, Menu } from "lucide-react";
 import { GeneratedBrief, IntakeFormData } from "@/types";
 import HeroSection from "@/components/preview/HeroSection";
 import AboutSection from "@/components/preview/AboutSection";
-import MenuHighlight from "@/components/preview/MenuHighlight";
 import MenuSection from "@/components/preview/MenuSection";
 import TestimonialsSection from "@/components/preview/TestimonialsSection";
-import SectionsPreview from "@/components/preview/SectionsPreview";
 import BookingOverlay from "@/components/preview/BookingOverlay";
 
 interface PreviewClientProps {
@@ -17,120 +15,119 @@ interface PreviewClientProps {
 }
 
 export default function PreviewClient({ formData, brief }: PreviewClientProps) {
-  const primary = brief.colorPalette[0]?.hex || "#E44332";
-  const dark = "#141414"; // Always use guaranteed dark for legibility
+  const primary = brief.colorPalette[0]?.hex || "#8B4513";
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: "#FAF7F2" }}>
       {/* Agency banner */}
       <motion.div
         initial={{ y: -40 }}
         animate={{ y: 0 }}
-        className="text-white text-center py-3 px-4 text-sm font-medium"
+        className="text-white text-center py-2.5 px-4 text-xs tracking-wider uppercase font-sans"
         style={{ backgroundColor: primary }}
       >
-        This is a draft preview for <strong>{formData.restaurantName}</strong> — crafted by magical.
+        Draft preview for <strong>{formData.restaurantName}</strong> — by magical.
       </motion.div>
 
-      {/* Site nav */}
-      <header className="px-6 py-5 border-b border-gray-100">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-bold tracking-tight" style={{ color: dark }}>
+      {/* Nav — minimal, elegant */}
+      <header className="px-6 py-6">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <button className="text-gray-800 md:hidden">
+            <Menu size={22} />
+          </button>
+          <nav className="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.2em] text-gray-500 font-sans">
+            <span className="hover:text-gray-900 cursor-pointer transition-colors">Menu</span>
+            <span className="hover:text-gray-900 cursor-pointer transition-colors">Story</span>
+          </nav>
+
+          <div className="text-center">
+            <h2 className="font-serif text-2xl md:text-3xl text-gray-900 tracking-tight">
               {formData.restaurantName}
-            </span>
+            </h2>
             {brief.tagline && (
-              <p className="text-xs text-gray-400 mt-0.5">{brief.tagline}</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mt-1 font-sans">
+                {brief.tagline}
+              </p>
             )}
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-            <span className="hover:text-gray-900 cursor-pointer">Menu</span>
-            <span className="hover:text-gray-900 cursor-pointer">About</span>
-            <span className="hover:text-gray-900 cursor-pointer">Reviews</span>
-            <span className="hover:text-gray-900 cursor-pointer">Contact</span>
-            <button
-              className="px-5 py-2.5 rounded-lg text-white text-sm font-semibold"
+
+          <nav className="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.2em] text-gray-500 font-sans">
+            <span className="hover:text-gray-900 cursor-pointer transition-colors">Contact</span>
+            <a
+              href="#reserve"
+              className="px-5 py-2.5 text-white text-xs uppercase tracking-[0.15em] font-sans transition-colors"
               style={{ backgroundColor: primary }}
             >
-              Reserve a Table
-            </button>
+              Reserve
+            </a>
           </nav>
-          <button className="md:hidden text-gray-600">
-            <Menu size={24} />
-          </button>
+          <a
+            href="#reserve"
+            className="md:hidden text-xs uppercase tracking-[0.15em] font-sans px-4 py-2 text-white"
+            style={{ backgroundColor: primary }}
+          >
+            Reserve
+          </a>
         </div>
       </header>
 
-      {/* Page sections */}
       <HeroSection brief={brief} formData={formData} />
       <AboutSection brief={brief} formData={formData} />
-      <MenuHighlight brief={brief} formData={formData} />
       <MenuSection brief={brief} />
       <TestimonialsSection brief={brief} />
-      <SectionsPreview brief={brief} />
 
-      {/* CTA banner before footer */}
-      <section className="py-20 px-6 text-center" style={{ backgroundColor: primary }}>
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-          Ready to Experience {formData.restaurantName}?
-        </h2>
-        <p className="text-white/80 text-lg mb-8 max-w-lg mx-auto">
-          Book your table today and taste what everyone&apos;s talking about.
+      {/* CTA — full-width dark band */}
+      <section id="reserve" className="py-32 px-6 bg-[#141414] text-center">
+        <p className="text-xs uppercase tracking-[0.3em] text-gray-500 font-sans mb-6">
+          Reservations
         </p>
-        <button className="px-8 py-4 bg-white rounded-lg font-bold text-lg hover:scale-[1.02] transition-transform" style={{ color: primary }}>
-          Make a Reservation
-        </button>
+        <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+          Join Us for Dinner
+        </h2>
+        <p className="text-gray-400 font-sans text-sm max-w-md mx-auto mb-10 leading-relaxed">
+          {formData.hours} &middot; {formData.location}
+        </p>
+        <a
+          href="#reserve"
+          className="inline-block px-10 py-4 text-white text-xs uppercase tracking-[0.2em] font-sans border border-white/30 hover:bg-white hover:text-[#141414] transition-colors"
+        >
+          Book a Table
+        </a>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6" style={{ backgroundColor: dark }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-10 mb-12">
-            <div>
-              <h4 className="text-white text-lg font-bold mb-2">{formData.restaurantName}</h4>
-              {brief.tagline && (
-                <p className="text-sm mb-4" style={{ color: primary }}>{brief.tagline}</p>
-              )}
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {brief.aboutParagraphs[0]?.slice(0, 120)}...
-              </p>
-            </div>
-            <div>
-              <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-4">Visit Us</h4>
-              <div className="space-y-3 text-sm text-gray-400">
-                <p className="flex items-center gap-2"><MapPin size={14} /> {formData.location}</p>
-                <p className="flex items-center gap-2"><Clock size={14} /> {formData.hours}</p>
-                <p className="flex items-center gap-2"><Phone size={14} /> (555) 123-4567</p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h4>
-              <div className="space-y-2 text-sm text-gray-400">
-                <p className="hover:text-white cursor-pointer transition-colors">Our Menu</p>
-                <p className="hover:text-white cursor-pointer transition-colors">Our Story</p>
-                <p className="hover:text-white cursor-pointer transition-colors">Reviews</p>
-                <p className="hover:text-white cursor-pointer transition-colors">Contact Us</p>
-              </div>
-              <button
-                className="mt-4 px-5 py-2.5 rounded-lg text-white text-sm font-semibold"
-                style={{ backgroundColor: primary }}
-              >
-                Book a Table
-              </button>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-gray-500">
-              &copy; 2026 {formData.restaurantName}. All rights reserved.
+      {/* Footer — minimal, elegant */}
+      <footer className="py-20 px-6 bg-[#0f0f0f]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="font-serif text-3xl text-white mb-3">
+            {formData.restaurantName}
+          </h3>
+          {brief.tagline && (
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-500 font-sans mb-10">
+              {brief.tagline}
             </p>
-            <p className="text-xs text-gray-600">
-              Website concept by <span style={{ color: primary }}>magical.</span>
+          )}
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-sm text-gray-400 font-sans mb-10">
+            <span className="flex items-center gap-2">
+              <MapPin size={14} /> {formData.location}
+            </span>
+            <span className="flex items-center gap-2">
+              <Clock size={14} /> {formData.hours}
+            </span>
+            <span className="flex items-center gap-2">
+              <Phone size={14} /> (555) 123-4567
+            </span>
+          </div>
+
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-xs text-gray-600 font-sans">
+              &copy; 2026 {formData.restaurantName} &middot; Website concept by{" "}
+              <span style={{ color: primary }}>magical.</span>
             </p>
           </div>
         </div>
       </footer>
 
-      {/* Booking overlay */}
       <BookingOverlay primaryColor={primary} />
     </div>
   );
