@@ -5,11 +5,11 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 export async function generateBrief(formData: IntakeFormData) {
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
       responseMimeType: "application/json",
       temperature: 0.8,
-      maxOutputTokens: 2048,
+      maxOutputTokens: 8192,
     },
   });
 
